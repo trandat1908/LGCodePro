@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<char> S;
+
+
+int main()
+{
+    freopen("in.txt","r",stdin);
+    char s[10005];
+    char c[50005];
+    cin >> s >> c;
+    int index = 1;
+    int len1 = strlen(s);
+    int len2 = strlen(c);
+    S.push_back(0);
+    for(int i=0; i<len1;i++)
+    {
+        S.push_back(s[i]);
+        index++;
+    }
+
+    for(int i =0;i < len2; i++)
+    {
+        if(c[i] == 'L')
+        {
+            if(index > 0)
+            {
+                index--;
+            }
+            
+        }
+        else if(c[i] == 'R')
+        {
+            if(index < S.size())
+            {
+                index++;
+            }
+            
+        }
+        else if(c[i] == 'B')
+        {
+            if(index > 0)
+            {
+                index--;
+                S.erase(S.begin() + index);
+                // for(int i=0;i<S.size();i++)
+                // {
+                //     cout<<S[i];
+                // }
+                // cout<<endl;
+            }
+            
+        }
+        else
+        {
+            S.insert(S.begin() + index, c[i]);
+            index++;
+            // for(int i=0;i<S.size();i++)
+            // {
+            //     cout<<S[i];
+            // }
+            // cout<<endl;
+        }
+
+    }
+    char d = S.front();
+    if(d==0)
+    {
+        S.erase(S.begin());
+    }
+    for(int i=0;i<S.size();i++)
+    {
+        cout<<S[i];
+    }
+    //cout<<endl;
+
+    
+
+    return 0;
+}
