@@ -149,3 +149,86 @@ int main(void)
 
     return 0;
 }
+
+Cach 2
+#include <stdio.h>
+
+int N; // Number of executable code data
+int M; // Number of virus data
+int A[20000 + 10]; // Executable code data
+int B[10 + 10]; // Virus data
+int V[10 + 10]; // Virus variant data
+int mark[10 + 10]; // Checking array
+
+int sol; // Correct answer
+
+void InputData(void)
+{
+    int i;
+
+    scanf("%d %d", &N, &M);
+
+    for (i = 0; i < N; i++) {
+        scanf("%d", &A[i]);
+    }
+
+    for (i = 0; i < M; i++) {
+        scanf("%d", &B[i]);
+    }
+}
+
+void OutputData(void)
+{
+    printf("%d\n", sol);
+}
+
+int Find(int start)
+{
+    int i;
+    int gap = V[0] - A[start]; // Increased or decreased value
+
+    //check all virus variants by (2) Increases or decreases in values
+    for (i = 0; i < M; i++)
+        if (gap != V[i] - A[start + i])
+            return 0;
+
+    return 1;
+}
+
+void Solve(void)
+{
+    int i;
+
+    for (i = 0; i <= N - M; i++) {
+        sol += Find(i);
+    }
+}
+
+void CheckViruses(int k) {
+    // Create all virus variants by (1) Change in the order and check each of them in the executable code
+    for (int i = 0; i < M; i++) {
+        if (!mark[i]) {
+            V[k] = B[i];
+
+            mark[i] = 1;
+            if (k == M-1) // A virus variant is generated
+                Solve();
+            else
+                CheckViruses(k + 1);
+            mark[i] = 0;
+        }
+    }
+}
+
+int main(void)
+{
+    freopen("D:/Code/VirutTest/input.txt","r",stdin);
+    InputData(); // Input
+
+    CheckViruses(0); // Problem solving: check all virus variants
+
+    OutputData(); // Output
+
+    return 0;
+}
+
