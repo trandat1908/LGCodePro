@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+int n, m;
+bool c = false;
+string str = "";
+void findSolution(vector<int>& nums, long s, int k, vector<char> mV) {
+    if(c) return;
+    for(int i=k;i<n; i++) {
+        if(c) return;
+        for(int j=0; j<=3; j++) {
+            if(j==0) {
+                s += (long) nums[i];
+                if(i!=n-1)
+                    mV.push_back('+');
+                findSolution(nums, s, k+1, mV);
+                s -= nums[i];
+                mV.pop_back();
+            }
+            else if(j==1) {
+                s += (long) nums[i];
+                if(i!=n-1)
+                    mV.push_back('-');
+                findSolution(nums, s, k+1, mV);
+                s += nums[i];
+                mV.pop_back();
+            }
+            else if(j==2) {
+                s *= (long) nums[i];
+                if(i!=n-1)
+                    mV.push_back('*');
+                findSolution(nums, s, k+1, mV);
+                s /= nums[i];
+                mV.pop_back();
+            }
+        }
+        mV.pop_back();
+    }
+    if(s%101==0 && c== false) {
+        c = true;
+        for(int i=0; i<n; i++) {
+            if(i!=n-1) {
+                str += to_string(nums[i]);
+                str += mV[i];
+            } else {
+                str += to_string(nums[i]);
+            }
+        }
+    } 
+}
+
+
+int main() {
+    cin>>n;
+    vector<int> nums(n);
+    for(int i=0; i<n; i++) {
+        cin>>m;
+        nums[i] = m;
+    }
+    vector<char> mV;
+    findSolution(nums, 0, 0, mV);
+    
+    cout<<str<<endl;
+    return 0;
+}
