@@ -2,81 +2,82 @@
 
 using namespace std;
 int n;
-int A[10005];
 int hash_[10005][102];
+int hashminus[10005][102];
+int arr[10005];
 char operators[10005];
 bool c = false;
-void recursion(int p, int s) {
-    cout<<"p= "<<p<<" s= "<<s<<" A[p]= "<<A[p]<<endl;
 
-    if(s==0){
-        c = true;
+void perform(int p, int s) {
+    cout<<"p= "<<p<<" s= "<<s<<" arr[p]= "<<arr[p]<<endl;
+    if(p>n) {
+        if(s==0) {
+            c = true;
+        }
         return;
     }
-    if(p==n-1) {
-        return;
-    }
+
     if(s<0) {
-        if(hash_[p][s*(-1)]==1) {
+        if(hashminus[p][s*(-1)]==1) {
             return;
         } else {
-
-            hash_[p][s*(-1)] = 1;
+            hashminus[p][s*(-1)] = 1;
             cout<<"*"<<endl;
-            recursion(p+1, (s*A[p+1])%101);
+            perform(p+1, (s*arr[p])%101);
             if(c) {
-                operators[p] = '*';
+                operators[p-2] = '*';
+                return;
             }
             cout<<"+"<<endl;
-            recursion(p+1, (s+A[p+1])%101);
-
+            perform(p+1, (s+arr[p])%101);
             if(c) {
-                operators[p] = '+';
+                operators[p-2] = '+';
+                return;
             }
             cout<<"-"<<endl;
-            recursion(p+1, (s-A[p+1])%101);
+            perform(p+1, (s-arr[p])%101);
             if(c) {
-                operators[p] = '-';
+                operators[p-2] = '-';
+                return;
             }
         }
     } else {
         if(hash_[p][s]==1) {
             return;
         } else {
-
             hash_[p][s] = 1;
             cout<<"*"<<endl;
-            recursion(p+1, (s*A[p+1])%101);
+            perform(p+1, (s*arr[p])%101);
             if(c) {
-                operators[p] = '*';
+                operators[p-2] = '*';
+                return;
             }
             cout<<"+"<<endl;
-            recursion(p+1, (s+A[p+1])%101);
+            perform(p+1, (s+arr[p])%101);
             if(c) {
-                operators[p] = '+';
+                operators[p-2] = '+';
+                return;
             }
             cout<<"-"<<endl;
-            recursion(p+1, (s-A[p+1])%101);
+            perform(p+1, (s-arr[p])%101);
             if(c) {
-                operators[p] = '-';
+                operators[p-2] = '-';
+                return;
             }
         }
     }
 }
 
-
-
 int main() {
-    freopen("C:/Users/Dat Tran/OneDrive/Desktop/LGCodePro/ArithmeticExpressions/in.txt","r",stdin);
+    freopen("D:/Code/untitled12/in.txt","r",stdin);
     cin>>n;
-    for(int i=0; i<n; i++) {
-        cin>>A[i];
+    for(int i=1; i<=n; i++) {
+        cin>>arr[i];
     }
-
-    recursion(0, A[0]);
-    cout<<A[0];
-    for(int i=0;i<n-1;i++) {
-        cout<<operators[i]<<A[i+1];
+    perform(2, arr[1]);
+    cout<<arr[1];
+    for(int i=0; i<n-1; i++) {
+        cout<<operators[i]<<arr[i+2];
     }
     cout<<endl;
     return 0;
