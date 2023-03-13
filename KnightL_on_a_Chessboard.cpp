@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/challenges/knightl-on-chessboard/problem?isFullScreen=true
 #include <bits/stdc++.h>
 
 using namespace std;
