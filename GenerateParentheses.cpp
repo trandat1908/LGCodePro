@@ -64,3 +64,20 @@ public:
         return S;
     }
 };
+
+//Solution 3
+// vector<string> generateParenthesis(int n) {
+//     vector<string> S;
+//     if(n==0) 
+//         S.push_back("");
+//     else {
+//         for(int i=0; i<n; ++i) {
+//             for(string left : generateParenthesis(i)) {
+//                 for(string right : generateParenthesis(n-1-i)) {
+//                     S.push_back("("+left+")"+right);
+//                 }
+//             }
+//         }
+//     }
+//     return S;
+// }
