@@ -9,49 +9,62 @@ https://www.spoj.com/problems/SCALE/
 
 using namespace std;
 typedef long long ll;
-
-
-
+#define MAXK 10e9
+int t, n, d;
+ll c;
+bool sovle(vector<ll>& Q, ll k) {
+    ll s = 0;
+    for(int i=0; i<d; i++) {
+        int j = 0;
+        if(k!=1){
+            j = i%k;
+        }
+        if(j<n) {
+            s += Q[j];
+        }
+        if(s>=c) return true;
+    }
+    return false;
+}
 int main()
 {
-    freopen("D:/Code/Quests/in.txt","r",stdin);
-    int t, n, d;
-    ll c;
+    freopen("F:/Code/Quests/in.txt","r",stdin);
     cin>>t;
     while(t--) {
+        ll e, s = 0; //, k = MAXK;
         cin>>n>>c>>d;
-        vector<ll> quest(n);
-        vector<ll> count(n);
-        int u, m=0;
-        ll s = 0;
-        bool f = false;
+        vector<ll> Q(n);
+        bool f= false;
+        bool g = false;
         for(int i=0; i<n; i++) {
-            cin>>u;
-            if(u>m) m = u;
-            if(i<d) {
-                s += u;
-                if(s>=c) {
-                    f = true;
-                }
+            cin>> e;
+            s += e;
+            Q[i] = e;
+            if(i<d&&s>=c){
+                f = true;
             }
-            quest[i] = u;
         }
+        sort(Q.begin(), Q.end(), greater<ll>());
         if(f) {
             cout<<"Infinity"<<endl;
             continue;
         }
-        float c1= (float) c;
-        c1 = (float) c1/m;
-        if(c1>(float)d) {
-            cout<<"Impossible"<<endl;
-            continue;
-        }
-        sort(quest.begin(),quest.end(), greater<ll>());
-        for(int i=1; i<=d; i++) {
-            for(int j=0; j<n; i++) {
-                
+        ll l = 1, r = MAXK;
+        while(l<r) {
+            ll k = (r-l)/2 + l;
+            if(sovle(Q, k)) {
+                l = k+1;
+                g = true;
+            } else {
+                r = k;
             }
         }
+        if(g==false) {
+            cout<<"Impossible"<<endl;
+        } else {
+            cout<<l-2<<endl;
+        }
     }
+
     return 0;
 }
