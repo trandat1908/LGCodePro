@@ -10,6 +10,7 @@ https://www.spoj.com/problems/SCALE/
 using namespace std;
 typedef long long ll;
 #define MAXK 10e9
+#define MAXT 10e8
 int t, n, d;
 ll c;
 bool sovle(vector<ll>& Q, ll k) {
@@ -28,27 +29,18 @@ bool sovle(vector<ll>& Q, ll k) {
 }
 int main()
 {
-    freopen("F:/Code/Quests/in.txt","r",stdin);
+    freopen("D:/Code/Quests/in.txt","r",stdin);
     cin>>t;
     while(t--) {
-        ll e, s = 0; //, k = MAXK;
+        ll e;
         cin>>n>>c>>d;
         vector<ll> Q(n);
-        bool f= false;
         bool g = false;
         for(int i=0; i<n; i++) {
             cin>> e;
-            s += e;
             Q[i] = e;
-            if(i<d&&s>=c){
-                f = true;
-            }
         }
         sort(Q.begin(), Q.end(), greater<ll>());
-        if(f) {
-            cout<<"Infinity"<<endl;
-            continue;
-        }
         ll l = 1, r = MAXK;
         while(l<r) {
             ll k = (r-l)/2 + l;
@@ -62,9 +54,13 @@ int main()
         if(g==false) {
             cout<<"Impossible"<<endl;
         } else {
-            cout<<l-2<<endl;
+            if((l-2)>MAXT) {
+                cout<<"Infinity"<<endl;
+            } else {
+                cout<<l-2<<endl;
+            }
         }
     }
-
     return 0;
 }
+
