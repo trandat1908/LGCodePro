@@ -3,47 +3,21 @@
 class Solution {
 public:
 
-    bool isRepeat(vector<vector<int>>&nums, vector<int> mV) {
-        for(int i=0; i< (int)nums.size(); ++i) {
-            if(mV[0]==nums[i][0]) {
-                bool c = true;
-                int n1 = nums[i].size();
-                int n2 = mV.size();
-                int a = 0, b = 0;
-                while(a<n1&&b<n2) {
-                    if(mV[b]!=nums[i][a]) {
-                        c = false;
-                    }
-                    a++;
-                    b++;
-                } 
-                if(c) return true;
-            }
-        }
-        return false;
-    }
-    void backtrack(vector<int>& candidates, vector<vector<int>>& nums, vector<int> tmp, int& target, int& n, int k, int s, bool& c, int& cnt) {
+    void backtrack(vector<int>& candidates, vector<vector<int>>& nums, vector<int> tmp, int& target, int& n, int k, int s) {
     for(int i=k; i<n; ++i) {
         int t = s + candidates[i];
-        if(i==n-1) cnt++;
         if(t>target) {
             return;
         } else if(t==target) {
             tmp.push_back(candidates[i]);
-            if(isRepeat(nums, tmp)==false){
-                nums.push_back(tmp);
-            }
+            nums.push_back(tmp);
             tmp.pop_back();
             return;
         } else {
-            if(i==n-1) {
-                if(cnt==1)
-                    c = true;
-            }
             tmp.push_back(candidates[i]);
-            backtrack(candidates, nums, tmp, target, n, i+1, t, c, cnt);
-            if(c) return;
+            backtrack(candidates, nums, tmp, target, n, i+1, t);
             tmp.pop_back();
+            while((i+1)<n&&candidates[i+1]==candidates[i]) i++;
         }
     }
 
@@ -54,26 +28,81 @@ vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
     vector<vector<int>> nums;
     vector<int> tmp;
     int n = (int)candidates.size();
-    vector<int> mV(51, 0);
-    for(int i=0; i<n; ++i) {
-        if(mV[candidates[i]]<(target/candidates[i] + 1))
-            mV[candidates[i]]++;
-    }
-    candidates.clear();
-    for(int i=0; i<51; i++) {
-        for(int j=0; j<mV[i]; ++j) {
-            candidates.push_back(i);
-        }
-    }
-    n = (int)candidates.size();
-    for(int i=0; i<n; ++i) {
-        cout<<candidates[i]<<" ";
-    } 
     sort(candidates.begin(), candidates.end());
-    bool c = false;
-    int cnt = 0;
-    backtrack(candidates, nums, tmp, target, n, 0, 0, c, cnt);
+    backtrack(candidates, nums, tmp, target, n, 0, 0);
     return nums;
 }
 
 };
+
+
+
+---------------------------------------------------------------------
+    
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Solution {
+public:
+    
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> results;
+        vector<int> comb;
+        map<int,int> counter;
+        for(int candidate : candidates) {
+            if(counter.find(candidate) == counter.end()) {
+                counter[candidate] = 1;
+            } else {
+                counter[candidate]++;
+            }
+        }
+        vector<pair<int,int>> counterList;
+        map<int,int>::iterator it;
+        for(it = counter.begin(); it != counter.end(); ++it) {
+            counterList.push_back({it->first, it->second});
+        }
+        backtrack(comb, target, 0, counterList, results);
+        return results;
+    }
+
+
+    void backtrack(vector<int> comb, int remain, int curr, vector<pair<int,int>> counter, vector<vector<int>>& results) {
+        if(remain <= 0) {
+            if(remain==0) {
+                results.push_back(comb);
+            }
+            return;
+        }
+        for(int nextCurr = curr; nextCurr < counter.size(); ++nextCurr) {
+            pair<int,int> entry = counter[nextCurr];
+            int candidate = entry.first; 
+            int freq = entry.second;
+            if(freq<=0) continue;
+
+            comb.push_back(candidate);
+            counter[nextCurr].second = freq - 1;
+            backtrack(comb, remain - candidate, nextCurr, counter, results);
+
+            comb.pop_back();
+            counter[nextCurr].second = freq;
+
+        }
+    }
+};
+
+int main() {
+    vector<int> candidates = {2, 5, 2, 1, 2};
+    int target = 5;
+    Solution *so = new Solution();
+    vector<vector<int>> results = so->combinationSum2(candidates, target);
+    for(vector<int> comb : results) {
+        for(int i : comb) {
+            cout << i << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+
