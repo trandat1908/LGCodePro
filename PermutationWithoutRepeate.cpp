@@ -1,3 +1,27 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    vector<int> tmp;
+    bool visited[20];
+    void backtrack(vector<int>& a, const int& n, int k) {
+        if(k==n) {
+           ans.push_back(tmp);
+           return;
+        }
+        for(int i=0; i<n; ++i) {
+            if(visited[i]==false) {
+                visited[i] = true;
+                tmp.push_back(a[i]);
+                backtrack(a, n, k+1);
+                visited[i] = false;
+                tmp.pop_back();
+                while((i<n-1)&&a[i]==a[i+1]) i++;
+            }
+        }
+    }
+};
+
+-----------------------------------------------------------------
 // C++ program to print all the permutation
 // of the given string.
 #include <algorithm>
