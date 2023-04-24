@@ -1,4 +1,11 @@
 https://www.hackerrank.com/swct-pre-test
+https://codeforces.com/contest/1183/problem/C
+https://codeforces.com/contest/902/problem/B
+https://codeforces.com/contest/124/problem/B
+https://www.codechef.com/problems/LARGESTY
+https://codeforces.com/contest/796/problem/D
+https://codeforces.com/contest/1195/problem/C
+https://codeforces.com/contest/1176/problem/C
 
 #include <cmath>
 #include <cstdio>
