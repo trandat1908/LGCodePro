@@ -25,7 +25,7 @@ https://leetcode.com/problems/repeated-dna-sequences/
 https://leetcode.com/problems/binary-watch/
 https://leetcode.com/problems/minimum-speed-to-arrive-on-time/
 
-
+https://www.hackerrank.com/swct-pretest-2
 
 #include <cmath>
 #include <cstdio>
