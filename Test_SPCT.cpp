@@ -7,6 +7,26 @@ https://codeforces.com/contest/796/problem/D
 https://codeforces.com/contest/1195/problem/C
 https://codeforces.com/contest/1176/problem/C
 
+DP
+
+https://leetcode.com/problems/partition-equal-subset-sum/description/
+https://leetcode.com/problems/last-stone-weight-ii/description/
+https://atcoder.jp/contests/abc291/tasks/abc291_c
+
+Greedy
+
+https://leetcode.com/problems/maximal-score-after-applying-k-operations/description/
+https://leetcode.com/problems/minimize-maximum-of-array/description/
+https://leetcode.com/problems/sum-game/description/
+
+
+https://leetcode.com/problems/rectangle-overlap/
+https://leetcode.com/problems/repeated-dna-sequences/
+https://leetcode.com/problems/binary-watch/
+https://leetcode.com/problems/minimum-speed-to-arrive-on-time/
+
+
+
 #include <cmath>
 #include <cstdio>
 #include <vector>
