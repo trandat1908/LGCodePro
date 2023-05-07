@@ -11,3 +11,89 @@
   
   C++
   cout << setprecision(2) << fixed << "a = " << a << endl;
+  
+2. Convert
+2.1 Char to Int
+	char c = '8';
+    int n = c - 48;
+2.2 In to Char
+	int a = 5;
+    char b = a + 48;
+2.3 String to Int
+	string s = "45";
+    int a = stoi(s);
+2.4 Int to String
+	int a = 67;
+    string s = to_string(a);
+
+3. Permutation
+	void permute(string& a, int l, int r)
+	{
+		if (l == r)
+			cout << a << endl;
+		else {
+			for (int i = l; i <= r; i++) {
+				swap(a[l], a[i]);
+				permute(a, l + 1, r);
+				swap(a[l], a[i]);
+			}
+		}
+	}
+	
+	----------------------------------
+	int main()
+	{
+		int arr[] = { 1, 2, 3 };
+	 
+		sort(arr, arr + 3);
+	 
+		cout << "The 3! possible permutations with 3 elements:\n";
+		do {
+			cout << arr[0] << " " << arr[1] << " " << arr[2] << "\n";
+		} while (next_permutation(arr, arr + 3));
+	 
+		cout << "After loop: " << arr[0] << ' '
+			 << arr[1] << ' ' << arr[2] << '\n';
+	 
+		return 0;
+	}
+	-----------------------------------
+	Distinct permutations of the string
+	bool shouldSwap(char str[], int start, int curr)
+	{
+		for (int i = start; i < curr; i++)
+			if (str[i] == str[curr])
+				return 0;
+		return 1;
+	}
+	 
+	// Prints all distinct permutations in str[0..n-1]
+	void findPermutations(char str[], int index, int n)
+	{
+		if (index >= n) {
+			cout << str << endl;
+			return;
+		}
+	 
+		for (int i = index; i < n; i++) {
+	 
+			// Proceed further for str[i] only if it
+			// doesn't match with any of the characters
+			// after str[index]
+			bool check = shouldSwap(str, index, i);
+			if (check) {
+				swap(str[index], str[i]);
+				findPermutations(str, index + 1, n);
+				swap(str[index], str[i]);
+			}
+		}
+	}
+	 
+	// Driver code
+	int main()
+	{
+		char str[] = "ABCA";
+		int n = strlen(str);
+		findPermutations(str, 0, n);
+		return 0;
+	}
