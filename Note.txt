@@ -97,3 +97,13 @@
 		findPermutations(str, 0, n);
 		return 0;
 	}
+4. lower and upper
+    vector<int>::iterator lower, upper;
+    lower = lower_bound(v.begin(), v.end(), 6);
+    upper = upper_bound(v.begin(), v.end(), 6);
+    
+    it = s.lower_bound(3);
+    if (it != s.end()) {
+        cout << "The lower bound of key 3 is ";
+        cout << (*it) << endl;
+    }
