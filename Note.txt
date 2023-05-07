@@ -1,0 +1,13 @@
+1. Làm tròn phép chia
+  float  a = 5.654;
+  int a1 = round(a);
+  double ceil ( double ); => Hàm này sẽ chỉ luôn luôn làm tròn lên
+  double floor ( double ); => Ngược lại với hàm này sẽ chỉ luôn luôn làm tròn xuống.
+  Làm tròn đến số thập phân thứ n
+  C
+  float  a = 9.127658;
+  float a1 = (round(a * 100))/100;
+  printf("Lam tron so %f den chu so thap phan thu hai: %.2f", a, a1); //%.xf
+  
+  C++
+  cout << setprecision(2) << fixed << "a = " << a << endl;
