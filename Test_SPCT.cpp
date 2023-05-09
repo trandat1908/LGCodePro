@@ -18,6 +18,7 @@ Greedy
 https://leetcode.com/problems/maximal-score-after-applying-k-operations/description/
 https://leetcode.com/problems/minimize-maximum-of-array/description/
 https://leetcode.com/problems/sum-game/description/
+https://www.spoj.com/problems/TTBRM/
 
 
 https://leetcode.com/problems/rectangle-overlap/
