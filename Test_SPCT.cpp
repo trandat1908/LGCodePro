@@ -19,7 +19,7 @@ https://leetcode.com/problems/maximal-score-after-applying-k-operations/descript
 https://leetcode.com/problems/minimize-maximum-of-array/description/
 https://leetcode.com/problems/sum-game/description/
 https://www.spoj.com/problems/TTBRM/
-
+https://vnoi.info/wiki/algo/data-structures/deque-min-max.md
 
 https://leetcode.com/problems/rectangle-overlap/
 https://leetcode.com/problems/repeated-dna-sequences/
